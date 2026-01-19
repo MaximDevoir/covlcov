@@ -3,6 +3,11 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path=".editorconfig" />
+    <File Path="README.md" />
+  </Folder>
   <Project Path="D:/oss/covlcov/lcov/lcov.vcxproj" Id="03b5213a-3be9-4545-adf0-c8088764b9fd" />
   <Project Path="OpenCppCoverage/Plugin/Plugin.vcxproj" Id="2f439508-07e0-4084-9614-1a42bde8ed9a" />
 </Solution>
