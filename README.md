@@ -4,6 +4,13 @@
 
 ## Usage
 
+To generate lcov reports, use the `lcov` export type in your command:
+
+```bash
+--export_type=lcov
+--export_type=lcov:reports/coverage.info
+```
+
 ## Development
 
 Clone the repo and initialize the submodules:
