@@ -46,9 +46,6 @@ std::optional<std::filesystem::path> LCOVExporter::Export(const Plugin::Coverage
 			ofs << "end_of_record\n";
 		}
 	}
-
-
-	std::wcout << "LCOVExporter: coverage data exported to \"" << output.wstring() << "\"\n";
 	return output;
 }
 
@@ -72,7 +69,14 @@ void LCOVExporter::CheckArgument(const std::optional<std::wstring>& argument) {
 }
 
 std::wstring LCOVExporter::GetArgumentHelpDescription() {
-	return L"output file (optional)";
+	return L" lcov exporter plugin help\n"
+		L"  LCOV format export (optional output file)\n"
+		L" --export_type=lcov:reports/coverage.info\n"
+		L"If omitted, defaults to lcov.info\n";
 }
 
 int LCOVExporter::GetExportPluginVersion() const { return 1; }
+
+Plugin::IExportPlugin* CreatePlugin() {
+	return new LCOVExporter();
+}

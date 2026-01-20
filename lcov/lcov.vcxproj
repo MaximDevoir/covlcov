@@ -164,6 +164,11 @@
 			<Project>{2f439508-07e0-4084-9614-1a42bde8ed9a}</Project>
 		</ProjectReference>
 	</ItemGroup>
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<PreprocessorDefinitions>LCOV_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+		</ClCompile>
+	</ItemDefinitionGroup>
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
 	<ImportGroup Label="ExtensionTargets">
 	</ImportGroup>

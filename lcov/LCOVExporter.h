@@ -1,5 +1,11 @@
 #pragma once
 
+#ifdef LCOV_EXPORTS
+#  define LCOV_API __declspec(dllexport)
+#else
+#  define LCOV_API __declspec(dllimport)
+#endif
+
 #include "Plugin/Exporter/IExportPlugin.hpp"
 #include "Plugin/Exporter/CoverageData.hpp"
 
@@ -12,8 +18,4 @@ public:
 	[[nodiscard]] int GetExportPluginVersion() const override;
 };
 
-extern "C" {
-inline __declspec(dllexport) Plugin::IExportPlugin* CreatePlugin() {
-	return new LCOVExporter();
-}
-}
+extern "C" LCOV_API Plugin::IExportPlugin* CreatePlugin();
