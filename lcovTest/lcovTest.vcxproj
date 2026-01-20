@@ -1,153 +1,158 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<ItemGroup Label="ProjectConfigurations">
-		<ProjectConfiguration Include="Debug|Win32">
-			<Configuration>Debug</Configuration>
-			<Platform>Win32</Platform>
-		</ProjectConfiguration>
-		<ProjectConfiguration Include="Release|Win32">
-			<Configuration>Release</Configuration>
-			<Platform>Win32</Platform>
-		</ProjectConfiguration>
-		<ProjectConfiguration Include="Debug|x64">
-			<Configuration>Debug</Configuration>
-			<Platform>x64</Platform>
-		</ProjectConfiguration>
-		<ProjectConfiguration Include="Release|x64">
-			<Configuration>Release</Configuration>
-			<Platform>x64</Platform>
-		</ProjectConfiguration>
-	</ItemGroup>
-	<PropertyGroup Label="Globals">
-		<ProjectGuid>{fe8e03dc-c71e-4c0c-abc5-68087803cac3}</ProjectGuid>
-		<Keyword>Win32Proj</Keyword>
-		<WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
-		<ConfigurationType>Application</ConfigurationType>
-		<PlatformToolset>v145</PlatformToolset>
-		<CharacterSet>Unicode</CharacterSet>
-	</PropertyGroup>
-	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
-	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
-	<ImportGroup Label="ExtensionSettings"/>
-	<ImportGroup Label="Shared"/>
-	<ImportGroup Label="PropertySheets"/>
-	<PropertyGroup Label="UserMacros"/>
-	<ItemDefinitionGroup/>
-	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-		<ClCompile>
-			<PrecompiledHeader>Use</PrecompiledHeader>
-			<PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-			<Optimization>Disabled</Optimization>
-			<PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-			<WarningLevel>Level3</WarningLevel>
-		</ClCompile>
-		<Link>
-			<GenerateDebugInformation>true</GenerateDebugInformation>
-			<SubSystem>Console</SubSystem>
-		</Link>
-	</ItemDefinitionGroup>
-	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-		<ClCompile>
-			<PrecompiledHeader>Use</PrecompiledHeader>
-			<PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-			<Optimization>Disabled</Optimization>
-			<PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-			<WarningLevel>Level3</WarningLevel>
-		</ClCompile>
-		<Link>
-			<GenerateDebugInformation>true</GenerateDebugInformation>
-			<SubSystem>Console</SubSystem>
-		</Link>
-	</ItemDefinitionGroup>
-	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-		<ClCompile>
-			<PrecompiledHeader>Use</PrecompiledHeader>
-			<PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-			<PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-			<WarningLevel>Level3</WarningLevel>
-			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-		</ClCompile>
-		<Link>
-			<GenerateDebugInformation>true</GenerateDebugInformation>
-			<SubSystem>Console</SubSystem>
-			<OptimizeReferences>true</OptimizeReferences>
-			<EnableCOMDATFolding>true</EnableCOMDATFolding>
-		</Link>
-	</ItemDefinitionGroup>
-	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-		<ClCompile>
-			<PrecompiledHeader>Use</PrecompiledHeader>
-			<PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-			<PreprocessorDefinitions>X64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-			<WarningLevel>Level3</WarningLevel>
-			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-		</ClCompile>
-		<Link>
-			<GenerateDebugInformation>true</GenerateDebugInformation>
-			<SubSystem>Console</SubSystem>
-			<OptimizeReferences>true</OptimizeReferences>
-			<EnableCOMDATFolding>true</EnableCOMDATFolding>
-		</Link>
-	</ItemDefinitionGroup>
-	<ItemDefinitionGroup>
-		<ClCompile>
-			<LanguageStandard>stdcpp20</LanguageStandard>
-		</ClCompile>
-	</ItemDefinitionGroup>
+    <ItemGroup Label="ProjectConfigurations">
+        <ProjectConfiguration Include="Debug|Win32">
+            <Configuration>Debug</Configuration>
+            <Platform>Win32</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release|Win32">
+            <Configuration>Release</Configuration>
+            <Platform>Win32</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Debug|x64">
+            <Configuration>Debug</Configuration>
+            <Platform>x64</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release|x64">
+            <Configuration>Release</Configuration>
+            <Platform>x64</Platform>
+        </ProjectConfiguration>
+    </ItemGroup>
+    <PropertyGroup Label="Globals">
+        <ProjectGuid>{fe8e03dc-c71e-4c0c-abc5-68087803cac3}</ProjectGuid>
+        <Keyword>Win32Proj</Keyword>
+        <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+        <ConfigurationType>Application</ConfigurationType>
+        <PlatformToolset>v145</PlatformToolset>
+        <CharacterSet>Unicode</CharacterSet>
+    </PropertyGroup>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+    <ImportGroup Label="ExtensionSettings"/>
+    <ImportGroup Label="Shared"/>
+    <ImportGroup Label="PropertySheets"/>
+    <PropertyGroup Label="UserMacros"/>
+    <ItemDefinitionGroup/>
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+        <ClCompile>
+            <PrecompiledHeader>Use</PrecompiledHeader>
+            <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+            <Optimization>Disabled</Optimization>
+            <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+            <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+            <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+            <WarningLevel>Level3</WarningLevel>
+        </ClCompile>
+        <Link>
+            <GenerateDebugInformation>true</GenerateDebugInformation>
+            <SubSystem>Console</SubSystem>
+        </Link>
+    </ItemDefinitionGroup>
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        <ClCompile>
+            <PrecompiledHeader>Use</PrecompiledHeader>
+            <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+            <Optimization>Disabled</Optimization>
+            <PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+            <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+            <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+            <WarningLevel>Level3</WarningLevel>
+        </ClCompile>
+        <Link>
+            <GenerateDebugInformation>true</GenerateDebugInformation>
+            <SubSystem>Console</SubSystem>
+        </Link>
+    </ItemDefinitionGroup>
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+        <ClCompile>
+            <PrecompiledHeader>Use</PrecompiledHeader>
+            <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+            <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+            <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+            <WarningLevel>Level3</WarningLevel>
+            <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+        </ClCompile>
+        <Link>
+            <GenerateDebugInformation>true</GenerateDebugInformation>
+            <SubSystem>Console</SubSystem>
+            <OptimizeReferences>true</OptimizeReferences>
+            <EnableCOMDATFolding>true</EnableCOMDATFolding>
+        </Link>
+    </ItemDefinitionGroup>
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        <ClCompile>
+            <PrecompiledHeader>Use</PrecompiledHeader>
+            <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+            <PreprocessorDefinitions>X64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+            <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+            <WarningLevel>Level3</WarningLevel>
+            <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+        </ClCompile>
+        <Link>
+            <GenerateDebugInformation>true</GenerateDebugInformation>
+            <SubSystem>Console</SubSystem>
+            <OptimizeReferences>true</OptimizeReferences>
+            <EnableCOMDATFolding>true</EnableCOMDATFolding>
+        </Link>
+    </ItemDefinitionGroup>
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <LanguageStandard>stdcpp20</LanguageStandard>
+        </ClCompile>
+    </ItemDefinitionGroup>
 
-	<ItemGroup>
-		<ClInclude Include="pch.h"/>
-	</ItemGroup>
-	<ItemGroup>
-		<ClCompile Include="test.cpp"/>
-		<ClCompile Include="e2e.cpp"/>
-		<ClCompile Include="pch.cpp">
-			<PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-			<PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-			<PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-			<PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-		</ClCompile>
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\lcov\lcov.vcxproj">
-			<Project>{03b5213a-3be9-4545-adf0-c8088764b9fd}</Project>
-		</ProjectReference>
-		<ProjectReference Include="$(SolutionDir)\OpenCppCoverage\Plugin\Plugin.vcxproj">
-			<Project>{2f439508-07e0-4084-9614-1a42bde8ed9a}</Project>
-		</ProjectReference>
-	</ItemGroup>
-	<ItemDefinitionGroup>
-		<ClCompile>
-			<AdditionalIncludeDirectories>$(SolutionDir)OpenCppCoverage\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-		</ClCompile>
-		<ClCompile>
-			<AdditionalIncludeDirectories>$(SolutionDir)OpenCppCoverage\OpenCppCoverage\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-		</ClCompile>
+    <ItemGroup>
+        <ClInclude Include="pch.h"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ClCompile Include="test.cpp"/>
+        <ClCompile Include="e2e.cpp"/>
+        <ClCompile Include="pch.cpp">
+            <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+            <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+            <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+            <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+        </ClCompile>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\lcov\lcov.vcxproj">
+            <Project>{03b5213a-3be9-4545-adf0-c8088764b9fd}</Project>
+        </ProjectReference>
+        <ProjectReference Include="$(SolutionDir)\OpenCppCoverage\Plugin\Plugin.vcxproj">
+            <Project>{2f439508-07e0-4084-9614-1a42bde8ed9a}</Project>
+        </ProjectReference>
+    </ItemGroup>
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <AdditionalIncludeDirectories>$(SolutionDir)OpenCppCoverage\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+        </ClCompile>
+        <ClCompile>
+            <AdditionalIncludeDirectories>$(SolutionDir)OpenCppCoverage\OpenCppCoverage\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+        </ClCompile>
 
-	</ItemDefinitionGroup>
+    </ItemDefinitionGroup>
 
-	<ItemGroup>
-		<None Include="packages.config"/>
-	</ItemGroup>
-	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
-	<ImportGroup Label="ExtensionTargets">
-		<Import Project="..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets" Condition="Exists('..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')"/>
-	</ImportGroup>
-	<ItemDefinitionGroup>
-		<ClCompile>
-			<AdditionalIncludeDirectories>..\lcov;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-		</ClCompile>
-	</ItemDefinitionGroup>
-	<Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-		<PropertyGroup>
-			<ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-		</PropertyGroup>
-		<Error Condition="!Exists('..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets'))"/>
-	</Target>
+    <ItemGroup>
+        <None Include="packages.config"/>
+    </ItemGroup>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+    <ImportGroup Label="ExtensionTargets">
+        <Import Project="..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets" Condition="Exists('..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')"/>
+    </ImportGroup>
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <AdditionalIncludeDirectories>..\lcov;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+        </ClCompile>
+    </ItemDefinitionGroup>
+    <ItemGroup>
+        <None Include="snapshot.lcov">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+        <PropertyGroup>
+            <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+        </PropertyGroup>
+        <Error Condition="!Exists('..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets'))"/>
+    </Target>
 </Project>
