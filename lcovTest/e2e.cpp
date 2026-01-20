@@ -125,11 +125,16 @@ ProcessResult RunProcessCapture(const std::wstring& exePath, const std::wstring&
 	return result;
 }
 
+// Note: We are using cwd as base for paths. You must be running tasks from within the lcovTest folder.
 TEST(E2E, RunExeWithString) {
-	// const std::wstring args = LR"(--some-argument="value")";
 	WCHAR cwdBuf[MAX_PATH];
 	GetCurrentDirectoryW(MAX_PATH, cwdBuf);
 	std::wcout << L"cwd: " << cwdBuf << L"\n";
+
+	std::filesystem::path cwdPath(cwdBuf);
+	std::filesystem::path thisFile = cwdPath / L"e2e.cpp";
+	ASSERT_TRUE(std::filesystem::exists(thisFile)) << "Must run from script from within lcovTest folder. CWD: "
+	    << cwdPath.string();
 
 	std::filesystem::path releasePath = std::filesystem::path(cwdBuf)
 		/ L".."
@@ -169,9 +174,12 @@ TEST(E2E, RunExeWithString) {
 		/ L"codecov"
 		/ L"coverage_report.lcov";
 
-	std::filesystem::path snapshotPath = std::filesystem::path(cwdBuf)
-		/ L"snapshot.lcov";
-
+	// std::filesystem::path snapshotPath = std::filesystem::path(cwdBuf)
+	// 	/ L"snapshot.lcov";
+	WCHAR exeBuf[MAX_PATH];
+	GetModuleFileNameW(nullptr, exeBuf, MAX_PATH);
+	std::filesystem::path exeDir = std::filesystem::path(exeBuf).parent_path();
+	std::filesystem::path snapshotPath = exeDir / L"snapshot.lcov";
 	// Check if file was created
 	ASSERT_TRUE(std::filesystem::exists(codecovPath)) << "LCOV output file not found at: " << codecovPath.string();
 	ASSERT_TRUE(FilesAreIdentical(snapshotPath, codecovPath));
