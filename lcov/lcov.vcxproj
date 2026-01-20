@@ -167,4 +167,24 @@
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
 	<ImportGroup Label="ExtensionTargets">
 	</ImportGroup>
+
+	<Target Name="CopyLCOVExporter" AfterTargets="Build" Condition="'$(TargetName)' == 'lcov'">
+		<PropertyGroup>
+			<DeployDir>$(SolutionDir)OpenCppCoverage\$(Platform)\$(Configuration)\Plugins\Exporter\</DeployDir>
+			<BuiltDll>$(OutDir)$(TargetName)$(TargetExt)</BuiltDll>
+		</PropertyGroup>
+
+		<Message Text="DeployDir: $(DeployDir)" Importance="high"/>
+		<Message Text="Destination exists, attempting copy of $(BuiltDll)..." Importance="high" Condition="Exists('$(DeployDir)')"/>
+		<Message Text="Destination $(DeployDir) does not exist, skipping copy." Importance="high" Condition="!Exists('$(DeployDir)')"/>
+
+		<Copy SourceFiles="$(BuiltDll)"
+					DestinationFiles="$(DeployDir)$(TargetName)$(TargetExt)"
+					Condition="Exists('$(DeployDir)')">
+			<Output TaskParameter="CopiedFiles" ItemName="CopiedFiles"/>
+		</Copy>
+
+		<Message Text="Copied @(CopiedFiles) to $(DeployDir)" Importance="high" Condition=" '@(CopiedFiles)' != '' "/>
+		<Message Text="No files were copied (source missing)." Importance="high" Condition=" '@(CopiedFiles)' == '' And Exists('$(DeployDir)') "/>
+	</Target>
 </Project>
