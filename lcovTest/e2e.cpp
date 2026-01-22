@@ -133,27 +133,30 @@ TEST(E2E, RunExeWithString) {
 
 	std::filesystem::path cwdPath(cwdBuf);
 	std::filesystem::path thisFile = cwdPath / L"e2e.cpp";
-	ASSERT_TRUE(std::filesystem::exists(thisFile)) << "Must run from script from within lcovTest folder. CWD: "
-	    << cwdPath.string();
+	ASSERT_TRUE(std::filesystem::exists(thisFile)) << "Must run from script from within lcovTest folder. Your current working directory is: " << cwdPath.string();
 
-	std::filesystem::path releasePath = std::filesystem::path(cwdBuf)
+	std::filesystem::path debugPath = std::filesystem::path(cwdBuf)
 		/ L".."
 		/ L"OpenCppCoverage"
 		/ L"x64"
-		/ L"Release";
+		/ L"Debug";
+	std::filesystem::path releasePath = std::filesystem::path(cwdBuf)
+	/ L".."
+	/ L"OpenCppCoverage"
+	/ L"x64"
+	/ L"Release";
 	std::filesystem::path exePath = releasePath
 		/ L"OpenCppCoverage.exe";
-	std::filesystem::path pluginPath = releasePath
+	std::filesystem::path pluginPath = debugPath
 		/ L"Plugins"
 		/ L"Exporter"
 		/ L"lcov.dll";
 	std::filesystem::path lcovTestE2EMockPath = std::filesystem::path(cwdBuf)
 		/ L".."
 		/ L"x64"
-		/ L"Release"
+		/ L"Debug"
 		/ L"lcovTestE2EMock.exe";
 
-	// get a std::wstring for CreateProcessW
 	std::wstring exePathW = exePath.wstring();
 
 	ASSERT_TRUE(std::filesystem::exists(exePath)) << "Executable not found at: " << exePath.string();
