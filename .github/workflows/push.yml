@@ -1,0 +1,34 @@
+on: [ push, pull_request ]
+jobs:
+  build:
+    name: Unit and E2E Tests
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - name: Cache NuGet packages
+        id: cache-packages
+        uses: actions/cache@v4
+        with:
+          path: ./OpenCppCoverage/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('./OpenCppCoverage/InstallThirdPartyLibraries.ps1') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Install third party libraries
+        if: steps.cache-packages.outputs.cache-hit != 'true'
+        run: ./OpenCppCoverage/InstallThirdPartyLibraries.ps1
+
+      - name: Build solution
+        run:
+          msbuild /m ./OpenCppCoverage/CppCoverage.slnx /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v143
+          msbuild /m ./OpenCppCoverage/CppCoverage.slnx /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
+          msbuild /m covlcov.slnx /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v143
+
+      - name: Run unit tests
+        run: |
+          cd lcovTest
+          .\..\x64\Debug\lcovTest.exe
+          cd ..
