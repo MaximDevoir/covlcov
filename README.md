@@ -27,11 +27,24 @@ If you have already cloned the repo without `--recurse-submodules`, you can init
 
 ```bash
 git submodule update --init --recursive
+
+.\OpenCppCoverage\InstallThirdPartyLibraries.ps1
+
+# If your Windows execution policy is restricted from running scripts try running a one-time bypass:
+
+powershell -ExecutionPolicy Bypass -File .\OpenCppCoverage\InstallThirdPartyLibraries.ps1
 ```
 
 ### Testing
 
-After building the solution, run the tests within lcovTest or use the following command in the build directory:
+The easiest way to test is to use your IDE to run the tests within `lcovTest`.
+
+You can also use [act](https://github.com/nektos/act) to run the tests locally:
+
+```bash
+act -P windows-latest=-self-hosted
+```
+
 
 ## Licensing
 
