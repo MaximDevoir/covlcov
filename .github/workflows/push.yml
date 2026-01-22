@@ -29,7 +29,7 @@ jobs:
           cd ..
 
       - name: Build solution
-        run:
+        run: |
           msbuild /m ./OpenCppCoverage/CppCoverage.slnx /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v143
           msbuild /m ./OpenCppCoverage/CppCoverage.slnx /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
           msbuild /m covlcov.slnx /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v143
