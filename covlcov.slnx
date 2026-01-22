@@ -1,18 +1,23 @@
 <Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
+	<Configurations>
+		<Platform Name="x64"/>
+		<Platform Name="x86"/>
+	</Configurations>
 
-  <Folder Name="/Solution Items/">
-    <File Path=".gitignore" />
-    <File Path=".editorconfig" />
-    <File Path="README.md" />
-  </Folder>
-  <Project Path="lcov/lcov.vcxproj" Id="03b5213a-3be9-4545-adf0-c8088764b9fd" />
-  <Project Path="lcovTest/lcovTest.vcxproj" Id="fe8e03dc-c71e-4c0c-abc5-68087803cac3">
-    <BuildDependency Project="lcovTestE2EMock/lcovTestE2EMock.vcxproj" />
-  </Project>
-  <Project Path="lcovTestE2EMock/lcovTestE2EMock.vcxproj" />
-  <Project Path="OpenCppCoverage/Plugin/Plugin.vcxproj" Id="2f439508-07e0-4084-9614-1a42bde8ed9a" />
+	<Folder Name="/Solution Items/">
+		<File Path=".gitignore"/>
+		<File Path=".editorconfig"/>
+		<File Path="README.md"/>
+	</Folder>
+
+	<Folder Name="/CI Workflows/">
+		<File Path=".github/workflows/push.yml"/>
+	</Folder>
+
+	<Project Path="lcov/lcov.vcxproj" Id="03b5213a-3be9-4545-adf0-c8088764b9fd"/>
+	<Project Path="lcovTest/lcovTest.vcxproj" Id="fe8e03dc-c71e-4c0c-abc5-68087803cac3">
+		<BuildDependency Project="lcovTestE2EMock/lcovTestE2EMock.vcxproj"/>
+	</Project>
+	<Project Path="lcovTestE2EMock/lcovTestE2EMock.vcxproj"/>
+	<Project Path="OpenCppCoverage/Plugin/Plugin.vcxproj" Id="2f439508-07e0-4084-9614-1a42bde8ed9a"/>
 </Solution>
