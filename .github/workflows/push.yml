@@ -17,6 +17,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
       - name: Install third party libraries
         if: steps.cache-packages.outputs.cache-hit != 'true'
         continue-on-error: true
