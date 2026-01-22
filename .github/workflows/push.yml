@@ -20,7 +20,10 @@ jobs:
       - name: Install third party libraries
         if: steps.cache-packages.outputs.cache-hit != 'true'
         continue-on-error: true
-        run: ./OpenCppCoverage/InstallThirdPartyLibraries.ps1
+        run: |
+          cd OpenCppCoverage
+          ./InstallThirdPartyLibraries.ps1
+          cd ..
 
       - name: Build solution
         run:
