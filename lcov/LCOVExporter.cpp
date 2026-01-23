@@ -10,24 +10,44 @@
 #include <fstream>
 #include <iostream>
 
+#include "ExporterConfig.h"
+
 std::optional<std::filesystem::path> LCOVExporter::Export(const Plugin::CoverageData& coverageData,
                                                           const std::optional<std::wstring>& argument) {
-	std::filesystem::path output = argument ? *argument : L"lcov.info";
-	std::wofstream ofs{output, std::ios::binary};
+	std::filesystem::path outputPath = argument ? *argument : L"lcov.info";
+	std::wofstream ofs{outputPath, std::ios::binary};
+	if (!ofs) {
+		cfg.Log.AddMsg(ExporterConfigLog::MsgLevel::Error,
+		               "LCOV Exporter: Cannot create the output file for LCOV export: " +
+		               outputPath.string());
+		cfg.Log.LogMessages();
+		return outputPath;
+	}
 
-	if (!ofs)
-		throw std::runtime_error("LCOV Exporter: Cannot create the output file for LCOV export.");
+	if (cfg.Log.HasErrors()) {
+		cfg.Log.LogMessages();
+		return outputPath;
+	}
 
-	if (coverageData.GetModules().empty())
-		return output;
+	if (coverageData.GetModules().empty()) {
+		return outputPath;
+	}
 
+	if (cfg.GetResolvedBaseDir() != std::filesystem::path{}) {
+		cfg.Log.AddMsg(ExporterConfigLog::MsgLevel::Info, "Base directory resolved to: " + cfg.GetResolvedBaseDir().string());
+		cfg.Log.AddMsg(ExporterConfigLog::MsgLevel::Info, "Only files within base directory will be included in report");
+	}
 
 	for (const auto& mod : coverageData.GetModules()) {
 		for (const auto& file : mod->GetFiles()) {
+			const auto sfPath = cfg.MakeSFPath(file->GetPath());
+			if (!cfg.ShouldIncludeInReportByPath(file->GetPath())) {
+				cfg.Log.AddMsg(ExporterConfigLog::MsgLevel::Info, "Excluding file from report. Not within configured include path: " + sfPath.string());
+				continue;
+			}
 			ofs << "TN:" << '\n';
 			// Source file path
-			ofs << "SF:" << file->GetPath().wstring() << '\n';
-
+			ofs << "SF:" << sfPath.generic_wstring() << '\n';
 			const auto& lines = file->GetLines();
 
 			// DA entries: one per line, hit count is 1 (executed) or 0 (not)
@@ -46,12 +66,13 @@ std::optional<std::filesystem::path> LCOVExporter::Export(const Plugin::Coverage
 			ofs << "end_of_record\n";
 		}
 	}
-	return output;
+
+	cfg.Log.LogMessages();
+	return outputPath;
 }
 
 void LCOVExporter::CheckArgument(const std::optional<std::wstring>& argument) {
 	std::wcout << std::wstring(5, '\n');
-	// simple log argument
 	if (argument) {
 		std::wcout << "LCOVExporter::CheckArgument: argument=\"" << *argument << "\"\n";
 	} else {

@@ -1,5 +1,9 @@
 #pragma once
 
+#include "ExporterConfig.h"
+
+#include <filesystem>
+
 #ifdef LCOV_EXPORTS
 #  define LCOV_API __declspec(dllexport)
 #else
@@ -11,6 +15,8 @@
 
 class LCOVExporter : public Plugin::IExportPlugin {
 public:
+	ExporterConfig cfg{std::filesystem::current_path()};
+
 	void CheckArgument(const std::optional<std::wstring>& argument) override;
 	std::optional<std::filesystem::path> Export(const Plugin::CoverageData& coverageData,
 	                                            const std::optional<std::wstring>& argument) override;
