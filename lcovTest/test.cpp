@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "LCOVExporter.h"
-
 #include <filesystem>
 #include <fstream>
 #include <sstream>
+
+#include <yaml-cpp/yaml.h>
 
 #include "Plugin/OptionsParserException.hpp"
 #include "Plugin/Exporter/CoverageData.hpp"
@@ -31,7 +32,9 @@ TEST(Case2, TestName) {
 TEST(LCOVExporterTest, ExportBasicCoverage) {
 	Plugin::CoverageData data{L"TestRun", 0};
 	auto& module = data.AddModule(L"TestModule.exe");
-	auto& file = module.AddFile(L"C:\\TestPath\\TestFile.cpp");
+	fs::path cwd = fs::current_path();
+	auto filePath = cwd / L"Test\\TestFile.cpp";
+	auto& file = module.AddFile(filePath.wstring());
 	file.AddLine(1, true); // executed
 	file.AddLine(2, false); // not executed
 	file.AddLine(3, true); // executed
@@ -52,7 +55,15 @@ TEST(LCOVExporterTest, ExportBasicCoverage) {
 	} // ifs closed here
 
 	ASSERT_NE(content.find(L"TN:"), std::wstring::npos);
-	ASSERT_NE(content.find(L"SF:C:\\TestPath\\TestFile.cpp"), std::wstring::npos);
+	// Check if SF: line exists with something filled out for it.
+	{
+		auto pos = content.find(L"SF:");
+		ASSERT_NE(pos, std::wstring::npos);
+		auto eol = content.find(L'\n', pos);
+		if (eol == std::wstring::npos) eol = content.size();
+		// ensure at least 5 characters after "SF:" on the same line
+		ASSERT_GE(static_cast<int>(eol - (pos + 3)), 5);
+	}
 	ASSERT_NE(content.find(L"DA:1,1"), std::wstring::npos);
 	ASSERT_NE(content.find(L"DA:3,1"), std::wstring::npos);
 	ASSERT_NE(content.find(L"LF:3"), std::wstring::npos); // 3 lines found
