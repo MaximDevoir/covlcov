@@ -1,0 +1,8 @@
+{
+	"dependencies": [
+		{
+			"name": "yaml-cpp",
+			"default-features": true
+		}
+	]
+}
