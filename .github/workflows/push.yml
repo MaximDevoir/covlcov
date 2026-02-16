@@ -40,6 +40,7 @@ jobs:
         run: |
           msbuild /m ./OpenCppCoverage/CppCoverage.slnx /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v143
           msbuild /m ./OpenCppCoverage/CppCoverage.slnx /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
+          nuget restore covlcov.slnx
           msbuild /m covlcov.slnx /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v143
           msbuild /m covlcov.slnx /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
 
