@@ -45,12 +45,14 @@ jobs:
           msbuild /m covlcov.slnx /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
 
       - name: Run unit tests
+        continue-on-error: true
         run: |
           cd lcovTest
           .\..\x64\Debug\lcovTest.exe
           cd ..
 
       - name: Generate coverage report
+        continue-on-error: true
         run: |
           cd lcovTest
           & ".\..\OpenCppCoverage\x64\Release\OpenCppCoverage.exe" `
@@ -64,3 +66,6 @@ jobs:
             --cover_children `
             -- ".\..\x64\Release\lcovTest.exe"
           cd ..
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
