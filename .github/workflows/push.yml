@@ -31,7 +31,8 @@ jobs:
         run: |
           cd lcov
           vcpkg install
-          vcpkg integrate install
+          cd ../lcovTest
+          vcpkg install
           cd ..
       - name: Build solution
         run: |
