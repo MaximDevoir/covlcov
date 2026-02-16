@@ -27,15 +27,36 @@ jobs:
           cd OpenCppCoverage
           ./InstallThirdPartyLibraries.ps1
           cd ..
-
+      - name: Install vcpkg packages
+        run: |
+          cd lcov
+          vcpkg install
+          vcpkg integrate install
+          cd ..
       - name: Build solution
         run: |
           msbuild /m ./OpenCppCoverage/CppCoverage.slnx /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v143
           msbuild /m ./OpenCppCoverage/CppCoverage.slnx /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
           msbuild /m covlcov.slnx /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v143
+          msbuild /m covlcov.slnx /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
 
       - name: Run unit tests
         run: |
           cd lcovTest
           .\..\x64\Debug\lcovTest.exe
+          cd ..
+
+      - name: Generate coverage report
+        run: |
+          cd lcovTest
+          & ".\..\OpenCppCoverage\x64\Release\OpenCppCoverage.exe" `
+            --sources "lcov" `
+            --modules "lcov.dll" `
+            --excluded_sources "*vcpkg_installed*" `
+            --excluded_sources "*OpenCppCoverage*" `
+            --excluded_modules "*Plugins\Exporter\lcov.dll" `
+            --export_type=html:"../codecov/html" `
+            --export_type=lcov:"../codecov/coverage.info" `
+            --cover_children `
+            -- ".\..\x64\Release\lcovTest.exe"
           cd ..
