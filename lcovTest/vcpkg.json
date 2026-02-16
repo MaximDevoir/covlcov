@@ -3,6 +3,7 @@
 		{
 			"name": "yaml-cpp",
 			"default-features": true
-		}
+		},
+		"gtest"
 	]
 }
