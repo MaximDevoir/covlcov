@@ -54,5 +54,20 @@ jobs:
             --cover_children `
             -- ".\..\x64\Release\lcovTest.exe"
           cd ..
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./codecov/coverage.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
+
+      - name: Failure Check
+        if: always()
+        run: |
+          if [[ "${{ steps.tests.outcome }}" == "failure" ]]; then
+            echo "Tests failed"
+            exit 1
+          fi
