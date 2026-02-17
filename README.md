@@ -14,6 +14,20 @@ To generate lcov reports, use the `lcov` export type in your command:
 --export_type=lcov:reports/coverage.info
 ```
 
+## Installation
+
+1. Download the latest release from the [releases page](https://github.com/MaximDevoir/covlcov/releases).
+2. Copy `lcov.dll` to `BINARY_FOLDER\Plugins\Exporter` where `BINARY_FOLDER` is the folder containing `OpenCppCoverage.exe`.
+3. Run OpenCppCoverage --sources MySourcePath --exportType lcov -- .\ConsoleApplication
+
+You can add a `.covlcov` file to the root of your project to configure the exporter behavior (such as normalizing paths, and including files within
+the project root):
+
+```yml
+# .covlcov
+includeByBaseDir: true
+```
+
 ## `.covlcov` Format
 
 The plugin will walk up the directory from the current script execution and look for a `.covlcov` file to read the configuration from.
