@@ -1,6 +1,9 @@
 # covlcov
 
-> An lcov exporter for OpenCppCoverage
+[![.github/workflows/push.yml](https://github.com/MaximDevoir/covlcov/actions/workflows/push.yml/badge.svg)](https://github.com/MaximDevoir/covlcov/actions/workflows/push.yml)
+[![codecov](https://codecov.io/gh/MaximDevoir/covlcov/graph/badge.svg?token=6LDRVMWCQU)](https://codecov.io/gh/MaximDevoir/covlcov)
+
+> An lcov exporter for OpenCppCoverage.
 
 ## Usage
 
