@@ -61,9 +61,6 @@ jobs:
           files: ./codecov/coverage.info
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Failure Check
         if: steps.tests.outcome == 'failure'
         run: exit 1
