@@ -8,27 +8,15 @@ jobs:
         with:
           submodules: true
 
-      - name: Cache NuGet packages
-        id: cache-packages
-        uses: actions/cache@v4
-        with:
-          path: ./OpenCppCoverage/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('./OpenCppCoverage/InstallThirdPartyLibraries.ps1') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
-
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
 
-      - name: Install third party libraries
-        if: steps.cache-packages.outputs.cache-hit != 'true'
-        continue-on-error: true
-        run: |
-          cd OpenCppCoverage
-          ./InstallThirdPartyLibraries.ps1
-          cd ..
       - name: Install vcpkg packages
         run: |
+          cd OpenCppCoverage
+          vcpkg install
+          vcpkg integrate install
+          cd ..
           cd lcov
           vcpkg install
           vcpkg integrate install
