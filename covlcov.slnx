@@ -7,6 +7,7 @@
 	<Folder Name="/Solution Items/">
 		<File Path=".gitignore" />
 		<File Path=".editorconfig" />
+		<File Path="bootstrap.bat" />
 		<File Path="README.md" />
 	</Folder>
 
