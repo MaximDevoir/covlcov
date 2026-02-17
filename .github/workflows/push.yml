@@ -65,9 +65,5 @@ jobs:
         uses: mxschmitt/action-tmate@v3
 
       - name: Failure Check
-        if: always()
-        run: |
-          if [[ "${{ steps.tests.outcome }}" == "failure" ]]; then
-            echo "Tests failed"
-            exit 1
-          fi
+        if: steps.tests.outcome == 'failure'
+        run: exit 1
