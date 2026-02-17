@@ -45,7 +45,6 @@ You can also use [act](https://github.com/nektos/act) to run the tests locally:
 act -P windows-latest=-self-hosted
 ```
 
-
 ## Licensing
 
 This project follows the parent GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
