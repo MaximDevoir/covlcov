@@ -11,28 +11,39 @@
 
 #include "gtest/gtest.h"
 
-
-bool FilesAreIdentical(const std::filesystem::path& a,
-                       const std::filesystem::path& b) {
-	namespace fs = std::filesystem;
-
-	if (!fs::exists(a) || !fs::exists(b))
-		return false;
-
-	if (fs::file_size(a) != fs::file_size(b))
-		return false;
-
-	std::ifstream fa(a, std::ios::binary);
-	std::ifstream fb(b, std::ios::binary);
+bool FilesAreEquivalentText(const std::filesystem::path& a,
+                            const std::filesystem::path& b) {
+	std::ifstream fa(a);
+	std::ifstream fb(b);
 
 	if (!fa || !fb)
 		return false;
 
-	return std::equal(
-		std::istreambuf_iterator<char>(fa),
-		std::istreambuf_iterator<char>(),
-		std::istreambuf_iterator<char>(fb)
-	);
+	std::string lineA, lineB;
+
+	while (true) {
+		bool aDone = !std::getline(fa, lineA);
+		bool bDone = !std::getline(fb, lineB);
+
+		if (aDone && bDone)
+			return true; // both ended → identical (ignoring CRLF)
+
+		if (aDone != bDone)
+			return false; // one ended first → different
+
+		if (lineA != lineB)
+			return false; // content differs
+	}
+}
+
+void LogFileContents(const std::filesystem::path& filePath, const std::string& label) {
+	std::ifstream file(filePath, std::ios::binary);
+	if (file) {
+		std::cout << "Contents of " << label << " (" << filePath.string() << "):" << std::endl;
+		std::cout << file.rdbuf() << std::endl; // Stream contents directly
+	} else {
+		std::cerr << "Failed to read contents of " << label << " (" << filePath.string() << ")" << std::endl;
+	}
 }
 
 // Runs `exePath` with `args` (both wide) and captures stdout/stderr.
@@ -133,7 +144,8 @@ TEST(E2E, RunExeWithString) {
 
 	std::filesystem::path cwdPath(cwdBuf);
 	std::filesystem::path thisFile = cwdPath / L"e2e.cpp";
-	ASSERT_TRUE(std::filesystem::exists(thisFile)) << "Must run from script from within lcovTest folder. Your current working directory is: " << cwdPath.string();
+	ASSERT_TRUE(std::filesystem::exists(thisFile)) << "Must run from script from within lcovTest folder. Your current working directory is: " << cwdPath
+.string();
 
 	std::filesystem::path debugPath = std::filesystem::path(cwdBuf)
 		/ L".."
@@ -141,10 +153,10 @@ TEST(E2E, RunExeWithString) {
 		/ L"x64"
 		/ L"Debug";
 	std::filesystem::path releasePath = std::filesystem::path(cwdBuf)
-	/ L".."
-	/ L"OpenCppCoverage"
-	/ L"x64"
-	/ L"Release";
+		/ L".."
+		/ L"OpenCppCoverage"
+		/ L"x64"
+		/ L"Release";
 	std::filesystem::path exePath = releasePath
 		/ L"OpenCppCoverage.exe";
 	std::filesystem::path pluginPath = debugPath
@@ -185,5 +197,10 @@ TEST(E2E, RunExeWithString) {
 	std::filesystem::path snapshotPath = exeDir / L"snapshot.lcov";
 	// Check if file was created
 	ASSERT_TRUE(std::filesystem::exists(codecovPath)) << "LCOV output file not found at: " << codecovPath.string();
-	ASSERT_TRUE(FilesAreIdentical(snapshotPath, codecovPath));
+
+	// Log the file contents
+	LogFileContents(snapshotPath, "Snapshot Path");
+	LogFileContents(codecovPath, "Codecov Path");
+
+	ASSERT_TRUE(FilesAreEquivalentText(snapshotPath, codecovPath));
 }
