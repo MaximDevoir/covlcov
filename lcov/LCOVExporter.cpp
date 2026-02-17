@@ -54,6 +54,9 @@ std::optional<std::filesystem::path> LCOVExporter::Export(const Plugin::Coverage
 			for (const auto& line : lines) {
 				if (line.HasBeenExecuted()) {
 					ofs << "DA:" << line.GetLineNumber() << ",1" << '\n';
+				} else {
+					// TODO: Should the inclusion of zero-hits be an option?
+					ofs << "DA:" << line.GetLineNumber() << ",0" << '\n';
 				}
 			}
 
