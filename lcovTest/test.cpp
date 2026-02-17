@@ -12,6 +12,7 @@
 #include "Plugin/Exporter/FileCoverage.hpp"
 #include "Plugin/Exporter/LineCoverage.hpp"
 
+#include <gtest/gtest.h>
 
 namespace fs = std::filesystem;
 
